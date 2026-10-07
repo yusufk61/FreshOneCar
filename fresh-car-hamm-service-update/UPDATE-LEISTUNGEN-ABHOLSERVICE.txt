@@ -1,0 +1,19 @@
+FRESH CAR HAMM — UPDATE LEISTUNGEN + ABHOL-/BRINGSERVICE
+
+Neu eingebaut:
+- Mobile Navigation mit 3-Striche-Menü
+- Leistungen & Preise aus der bereitgestellten Website.ods
+- Innenraumpaket: 150 €
+- Außenpaket: 100 €
+- Polituren: Hochglanz ab 150 €, 1-stufig ab 180 €, 2-stufig ab 220 €, 3-stufig ab 280 €, einzelne Kratzer nach Aufwand
+- Extras mit den angegebenen Ab-Preisen
+- Hinweis: Bei starker Verschmutzung / Mehraufwand kann der Preis höher ausfallen
+- Abhol- & Bringservice gegen Aufpreis, nach Absprache
+- Abholservice direkt im WhatsApp-Terminformular auswählbar
+- Hero, Ticker, Ablauf und Footer entsprechend aktualisiert
+
+Hinweis zur Tabelle:
+Offensichtliche Rechtschreibfehler wurden für die öffentliche Website sprachlich geglättet. Ein in der Tabelle doppelt aufgeführter Eintrag zum Schwärzen ausgebleichter Plastik-/Kunststoffteile wird auf der Website einmal dargestellt. Preise wurden dabei nicht verändert.
+
+Deployment:
+Den Inhalt dieses Ordners in das bestehende GitHub-Repository hochladen/ersetzen. Vercel deployt danach automatisch neu, sofern das Repository bereits verbunden ist.

@@ -1,0 +1,20 @@
+FRESH CAR HAMM — BILDER / VIDEO SPÄTER EINFÜGEN
+
+Logo ist bereits drin.
+
+VIDEO:
+public/media/showreel.mp4
+→ Sobald diese Datei vorhanden ist, erkennt die Website sie automatisch und zeigt sie im Showreel-Bereich.
+
+EMPFOHLENE BILDER FÜR DEN NÄCHSTEN SCHRITT:
+public/media/hero.webp
+public/media/gallery-01.webp
+public/media/gallery-02.webp
+public/media/gallery-03.webp
+public/media/gallery-04.webp
+public/media/gallery-05.webp
+public/media/gallery-06.webp
+public/media/before.webp
+public/media/after.webp
+
+Die Galerie-/Vorher-Nachher-Platzhalter werden beim nächsten Update mit den echten Fotos verbunden.
