@@ -1,6 +1,6 @@
 {
-  "name": "fresh-car-hamm-ultimate",
-  "version": "1.0.0",
+  "name": "fresh-car-hamm",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,11 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest"
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20.9"
   }
 }
