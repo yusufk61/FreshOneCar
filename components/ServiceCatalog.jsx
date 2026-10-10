@@ -56,6 +56,7 @@ export default function ServiceCatalog() {
         <style>{'#katalog [role="tabpanel"][hidden]{display:block!important}#katalog .price-tabs{display:none}#katalog [role="tabpanel"]{margin-bottom:28px}'}</style>
       </noscript>
 
+      <h2 className="sr-only">Leistungen und Preise im Überblick</h2>
       <div className="price-tabs" role="tablist" aria-label="Leistungskategorien" onKeyDown={onKeyDown}>
         {CATEGORIES.map((c) => (
           <button

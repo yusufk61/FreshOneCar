@@ -11,7 +11,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'Leistungen & Preise',
   description:
-    'Innenraumpaket 150 €, Außenpaket 100 €, Polituren ab 150 € und über 20 Extras – alle Leistungen und Preise von Fresh Car Hamm in Hamm auf einen Blick. Direkt per WhatsApp anfragen.',
+    'Innenraumpaket 150 €, Außenpaket 100 €, Polituren ab 150 € und 20 Extras – alle Leistungen und Preise von Fresh Car Hamm in Hamm auf einen Blick. Direkt per WhatsApp anfragen.',
   path: '/leistungen',
 });
 

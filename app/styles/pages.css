@@ -910,3 +910,25 @@ section[id],
     width: 100%;
   }
 }
+
+/* --- QA-Feinschliff: Kontrast, Fokus, kleine Viewports ------------------------------------------ */
+:root { --red-fill: #e01212; }
+html { scroll-padding-top: calc(var(--nav-top) + var(--nav-h) + 16px); }
+.btn-primary, .nav-cta, .form-submit, .menu-link.is-cta, .menu-card .btn-primary, .pickup-hint-badge { background: var(--red-fill); }
+.cta-band, .booking-wrap { background-color: var(--red-fill); }
+.cta-copy p, .pickup-copy > p, .booking-copy > p, .pickup-mini > small, .pickup-flow p, .pickup-flow > small { color: #fff; }
+.cta-band .eyebrow.light, .pickup-section .eyebrow { color: #fff; }
+.rating-number { padding-bottom: 0.2em; }
+.price-tabs button span, .extra-no, .price-index, .pager-link small, .service-no { color: #8a8a85; }
+@media (max-width: 1050px) { .price-note-card { padding-top: 64px; } }
+.extra-text { flex-wrap: wrap; gap: 4px 20px; min-width: 0; }
+.extra-text strong, .price-row > strong, .teaser-card h3 { min-width: 0; overflow-wrap: anywhere; hyphens: auto; }
+@media (max-width: 680px) {
+  .package-grid { grid-template-columns: minmax(0, 1fr); }
+  .price-note-card h3 { overflow-wrap: anywhere; }
+}
+@media (max-width: 360px) {
+  .teaser-card { column-gap: 12px; }
+  .teaser-card h3 { font-size: clamp(15px, 4.9vw, 21px); letter-spacing: 0; }
+  .extra-text strong, .price-row > strong { font-size: 13px; }
+}
