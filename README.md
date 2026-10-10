@@ -43,11 +43,15 @@ Node ≥ 20.9. Next.js und React sind bewusst auf feste Versionen gepinnt (`pack
    automatisch die echte Vercel-Produktions-Domain (`VERCEL_PROJECT_PRODUCTION_URL`); alternativ
    `NEXT_PUBLIC_SITE_URL=https://deine-domain.de` setzen. Es wird keine Domain erfunden.
 
+Link-Vorschau (WhatsApp/Social): `public/og/fresh-car-hamm-og.png` (1200×630), eingebunden über `lib/seo.js`. Das Bild (og:image,
+twitter:image) und alle Canonical-URLs erscheinen automatisch, sobald eine echte Domain bekannt ist (siehe oben).
+Favicon/App-Icons: `app/favicon.ico`, `app/icon.png`, `app/apple-icon.png` (aus dem Auto-Motiv des vorhandenen Logos).
+
 ## Inhalte pflegen
 
 | Was | Wo |
 |---|---|
-| Telefon/WhatsApp, Adresse, Instagram, Google-Place-ID, **Google-Rating & Rezensionsanzahl** | `data/site.js` |
+| Telefon/WhatsApp, Adresse, Instagram, Google-Place-ID, **Google-Rating & Rezensionsanzahl** (einzige Quelle, auch für die strukturierten Daten — vor Livegang prüfen) | `data/site.js` |
 | Leistungen & Preise (Quelle: `data/source/Website.ods`) | `data/services.js` |
 | Menü-Einträge | `data/navigation.js` |
 | WhatsApp-Nachrichtenformat | `lib/whatsapp.js` |

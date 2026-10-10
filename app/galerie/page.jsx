@@ -8,12 +8,12 @@ import PagePager from '@/components/PagePager';
 import Icon from '@/components/Icon';
 import { LINKS, SITE } from '@/data/site';
 import { getMedia } from '@/lib/media';
-import { pageMetadata, siteUrl } from '@/lib/seo';
+import { pageMetadata, siteUrl, jsonLd } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: 'Galerie',
   description:
-    'Showreel, Fotogalerie und Vorher-Nachher-Vergleich: So arbeitet Fresh Car Hamm bei der Fahrzeugaufbereitung in Hamm – mit Blick fürs Detail.',
+    'Showreel, Fotogalerie und Vorher-Nachher-Vergleich: So arbeitet Fresh Car Hamm bei der Fahrzeugaufbereitung in Hamm.',
   path: '/galerie',
 });
 
@@ -119,7 +119,7 @@ export default function GaleriePage() {
         text="Schick uns deine Anfrage – die WhatsApp-Nachricht wird automatisch für dich vorbereitet, wir melden uns direkt bei dir."
       />
       <PagePager href="/galerie" />
-      {galleryLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(galleryLd) }} /> : null}
+      {galleryLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(galleryLd) }} /> : null}
     </>
   );
 }

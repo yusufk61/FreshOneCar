@@ -14,12 +14,14 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import ScrollProgress from '@/components/ScrollProgress';
 import RevealObserver from '@/components/RevealObserver';
 import { SITE, LINKS } from '@/data/site';
-import { siteUrl } from '@/lib/seo';
+import { siteUrl, metadataBaseUrl, socialMetadata, jsonLd } from '@/lib/seo';
 
 const base = siteUrl();
+const metaBase = metadataBaseUrl();
+const homeDescription = 'Dein Auto. Frisch wie neu. Innenraum, Außenpflege, Politur und Abhol- & Bringservice in Hamm.';
 
 export const metadata = {
-  ...(base ? { metadataBase: new URL(base) } : {}),
+  ...(metaBase ? { metadataBase: new URL(metaBase) } : {}),
   title: {
     default: `${SITE.name} | ${SITE.claim}`,
     template: `%s | ${SITE.name}`,
@@ -27,13 +29,7 @@ export const metadata = {
   description: SITE.description,
   applicationName: SITE.name,
   formatDetection: { telephone: false },
-  openGraph: {
-    title: `${SITE.name} | ${SITE.claim}`,
-    description: 'Dein Auto. Frisch wie neu. Innenraum, Außenpflege, Politur und Abhol- & Bringservice in Hamm.',
-    type: 'website',
-    siteName: SITE.name,
-    locale: 'de_DE',
-  },
+  ...socialMetadata({ title: `${SITE.name} | ${SITE.claim}`, description: homeDescription }),
 };
 
 export const viewport = {
@@ -59,6 +55,7 @@ const localBusinessSchema = {
   hasMap: LINKS.googleMaps,
   sameAs: [LINKS.instagram, LINKS.googleMaps],
   ...(base ? { url: base, logo: `${base}/brand/fresh-car-hamm-logo.png`, image: `${base}/brand/fresh-car-hamm-logo.png` } : {}),
+  // Vor Veröffentlichung aktuelles Google Rating prüfen (Werte zentral in data/site.js).
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: SITE.google.rating.toFixed(1),
@@ -83,7 +80,7 @@ export default function RootLayout({ children }) {
         <Footer />
         <FloatingWhatsApp />
         <RevealObserver />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(localBusinessSchema) }} />
       </body>
     </html>
   );

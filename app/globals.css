@@ -6,6 +6,7 @@
   --line: #232323;
   --text: #f5f5f2;
   --muted: #9d9d98;
+  --text-dim: #8a8a85; /* kleinster erlaubter Grauton für Text auf Schwarz (≥ 5,4:1) */
   --red: #ff1717;
   --red2: #c80000;
   --green: #24d366;
@@ -292,7 +293,7 @@ main {
 }
 .hero-spec span {
   font-size: 9px;
-  color: #777;
+  color: var(--text-dim);
   letter-spacing: 0.2em;
 }
 .hero-spec b {
@@ -317,7 +318,7 @@ main {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #6f6f6c;
+  color: var(--text-dim);
 }
 .scroll-cue span {
   font-size: 9px;
@@ -356,7 +357,7 @@ main {
   font-size: 12px;
   font-weight: 950;
   letter-spacing: 0.14em;
-  color: #747470;
+  color: var(--text-dim);
 }
 .ticker i {
   font-style: normal;
@@ -390,7 +391,7 @@ main {
   max-width: 480px;
 }
 .service-no {
-  color: #555;
+  color: var(--text-dim);
   font-size: 11px;
   letter-spacing: 0.2em;
   font-weight: 800;
@@ -725,7 +726,7 @@ svg {
   letter-spacing: 0.12em;
 }
 .pickup-pill svg {
-  color: #777;
+  color: var(--text-dim);
 }
 @media (max-width: 680px) {
   .pickup-pill {

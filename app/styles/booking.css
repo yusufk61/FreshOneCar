@@ -56,7 +56,7 @@
   bottom: 16px;
   font-style: normal;
   font-size: 22px;
-  color: #555;
+  color: var(--text-dim);
 }
 .process-card:last-child i {
   color: var(--red);
@@ -251,7 +251,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6f6f6b;
+  color: var(--text-dim);
 }
 .bf-fields {
   display: grid;
@@ -278,7 +278,7 @@
   font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
-  color: #6f6f6b;
+  color: var(--text-dim);
 }
 .bf-input {
   display: block;
@@ -296,7 +296,7 @@
   transition: border-color 0.2s;
 }
 .bf-input::placeholder {
-  color: #6c6c68;
+  color: var(--text-dim);
   opacity: 1;
 }
 .bf-input:hover {
@@ -452,7 +452,7 @@
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: #6f6f6b;
+  color: var(--text-dim);
 }
 .bf-group-count {
   padding: 5px 9px;
@@ -739,7 +739,7 @@
   padding: 10px 18px;
   border: 0;
   border-radius: 12px;
-  background: var(--red);
+  background: var(--red-fill);
   color: #fff;
   cursor: pointer;
   font-weight: 950;
@@ -753,7 +753,7 @@
     background 0.2s;
 }
 .form-submit:hover {
-  background: #ff3030;
+  background: #f01a1a;
   transform: translateY(-1px);
 }
 .form-note {
@@ -1058,4 +1058,21 @@
   .form-submit {
     transition: none;
   }
+}
+
+/* iOS/Safari: leeres Datumsfeld behält Höhe, Breite und Lesbarkeit */
+.bf-date {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  line-height: 1.2;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+}
+.bf-date::-webkit-date-and-time-value {
+  min-height: 1.2em;
+}
+.bf-date::-webkit-datetime-edit {
+  padding: 0;
 }

@@ -79,7 +79,7 @@ section[id],
 .page-crumbs li + li:before {
   content: "/";
   margin: 0 0.8em;
-  color: #555;
+  color: var(--text-dim);
 }
 .page-crumbs a {
   display: inline-block;
@@ -223,7 +223,7 @@ section[id],
   font-weight: 900;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #66665f;
+  color: var(--text-dim);
 }
 .pager-link strong {
   font-size: clamp(15px, 2.2vw, 22px);
@@ -348,7 +348,7 @@ section[id],
   position: absolute;
   right: 18px;
   top: 18px;
-  color: #4f4f4b;
+  color: var(--text-dim);
   transition: color 0.2s;
 }
 .usp-cell:hover .usp-arrow {
@@ -441,7 +441,7 @@ section[id],
   font-weight: 900;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #686864;
+  color: var(--text-dim);
 }
 .teaser-price strong {
   font-size: 30px;
@@ -474,7 +474,7 @@ section[id],
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #66665f;
+  color: var(--text-dim);
 }
 
 /* --- Home: Abholservice-Teaser -------------------------------------------------------------- */
@@ -931,4 +931,11 @@ html { scroll-padding-top: calc(var(--nav-top) + var(--nav-h) + 16px); }
   .teaser-card { column-gap: 12px; }
   .teaser-card h3 { font-size: clamp(15px, 4.9vw, 21px); letter-spacing: 0; }
   .extra-text strong, .price-row > strong { font-size: 13px; }
+}
+
+/* --- Polish-Pass: Hero-Pills, Windows-Kontrastmodus, Datumsfeld (iOS) ------------------------------- */
+.pickup-pill { margin-right: 10px; }
+@media (forced-colors: active) {
+  .menu-bars i { background: CanvasText; }
+  .menu-dot { background: Highlight; forced-color-adjust: none; }
 }

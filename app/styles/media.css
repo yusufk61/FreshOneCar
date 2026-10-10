@@ -259,7 +259,7 @@ button.video-toggle:focus-visible {
   font-size: 9px;
   letter-spacing: 0.2em;
   font-weight: 800;
-  color: #77776f;
+  color: var(--text-dim);
 }
 .gallery-frame {
   position: relative;
@@ -331,7 +331,7 @@ button.video-toggle:focus-visible {
 }
 .gallery-caption b {
   font-size: 9px;
-  color: #7a7a75;
+  color: var(--text-dim);
   letter-spacing: 0.16em;
 }
 
@@ -493,7 +493,7 @@ html.lightbox-open body {
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.22em;
-  color: #77776f;
+  color: var(--text-dim);
   font-variant-numeric: tabular-nums;
 }
 .lightbox-count b {

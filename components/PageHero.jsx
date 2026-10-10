@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { SITE } from '@/data/site';
-import { siteUrl } from '@/lib/seo';
+import { siteUrl, jsonLd } from '@/lib/seo';
 
 // Einstieg jeder Unterseite: gleiche Designsprache wie der Start-Hero (Raster, rote Linie, Outline-Headline),
 // eigener Titel, kurzer Lead und passender CTA. Die Brotkrumen sind bewusst als dezente Eyebrow-Zeile gelöst.
@@ -50,7 +50,7 @@ export default function PageHero({ crumb, path, title, accent, children, actions
           </div>
         ) : null}
       </div>
-      {breadcrumbLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} /> : null}
+      {breadcrumbLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbLd) }} /> : null}
     </section>
   );
 }

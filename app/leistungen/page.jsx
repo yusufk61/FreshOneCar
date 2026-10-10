@@ -6,12 +6,12 @@ import PagePager from '@/components/PagePager';
 import Icon from '@/components/Icon';
 import { ALL_SERVICES, MIN_PRICES } from '@/data/services';
 import { PRICE_NOTE, SITE } from '@/data/site';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, jsonLd } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: 'Leistungen & Preise',
   description:
-    'Innenraumpaket 150 €, Außenpaket 100 €, Polituren ab 150 € und 20 Extras – alle Leistungen und Preise von Fresh Car Hamm in Hamm auf einen Blick. Direkt per WhatsApp anfragen.',
+    'Innenraumpaket 150 €, Außenpaket 100 €, Polituren ab 150 € und 20 Extras – alle Leistungen und Preise von Fresh Car Hamm auf einen Blick.',
   path: '/leistungen',
 });
 
@@ -98,7 +98,7 @@ export default function LeistungenPage() {
 
       <CtaBand text="Such dir deine Leistungen aus und schick uns die Anfrage – wir melden uns direkt auf WhatsApp zurück." />
       <PagePager href="/leistungen" />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(offerCatalog) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(offerCatalog) }} />
     </>
   );
 }

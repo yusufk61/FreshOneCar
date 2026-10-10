@@ -457,7 +457,7 @@
   content: "";
 }
 .pk-faq-no {
-  color: #555;
+  color: var(--text-dim);
   font-size: 11px;
   letter-spacing: 0.2em;
   font-weight: 800;

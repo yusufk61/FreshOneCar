@@ -33,17 +33,19 @@ export default function FloatingWhatsApp() {
   if (hiddenHere) return null;
 
   return (
-    <a
-      className={`floating-whatsapp${covered ? ' is-hidden' : ''}`}
-      href={genericWhatsappUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Termin über WhatsApp anfragen"
-      data-menu-inert
-      tabIndex={covered ? -1 : undefined}
-    >
-      <Icon name="whatsapp" size={22} />
-      <span>Termin</span>
-    </a>
+    <aside aria-label="WhatsApp-Schnellkontakt">
+      <a
+        className={`floating-whatsapp${covered ? ' is-hidden' : ''}`}
+        href={genericWhatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Termin über WhatsApp anfragen"
+        data-menu-inert
+        tabIndex={covered ? -1 : undefined}
+      >
+        <Icon name="whatsapp" size={22} />
+        <span>Termin</span>
+      </a>
+    </aside>
   );
 }

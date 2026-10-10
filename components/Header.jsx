@@ -22,8 +22,13 @@ export default function Header() {
     if (restoreFocus) buttonRef.current?.focus();
   }, []);
 
-  // Menü schließt automatisch bei Routenwechsel
+  // Menü schließt automatisch bei Routenwechsel; war es offen, springt der Fokus in den neuen Seiteninhalt
+  const focusMainAfterNav = useRef(false);
   useEffect(() => {
+    if (focusMainAfterNav.current) {
+      focusMainAfterNav.current = false;
+      document.getElementById('main-content')?.focus({ preventScroll: true });
+    }
     setOpen(false);
   }, [pathname]);
 
@@ -76,7 +81,11 @@ export default function Header() {
   return (
     <>
       <header className="nav-shell">
-        <Link className="brand" href="/" aria-label="Fresh Car Hamm – zur Startseite" onClick={() => setOpen(false)}>
+        <Link className="brand" href="/" aria-label="Fresh Car Hamm – zur Startseite" onClick={() => {
+            setOpen(false);
+            if (pathname === '/') window.scrollTo({ top: 0 });
+          }}
+        >
           <Logo width={154} priority />
         </Link>
 
@@ -129,7 +138,10 @@ export default function Header() {
                       href={item.href}
                       className={`menu-link${item.highlight ? ' is-cta' : ''}`}
                       aria-current={active ? 'page' : undefined}
-                      onClick={() => setOpen(false)}
+                      onClick={() => {
+                        focusMainAfterNav.current = true;
+                        setOpen(false);
+                      }}
                       tabIndex={open ? undefined : -1}
                     >
                       <b>{item.no}</b>

@@ -12,7 +12,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'Termin anfragen',
   description:
-    'Termin bei Fresh Car Hamm anfragen: Leistungen auswählen, Wunschtermin angeben und die vorbereitete Anfrage direkt per WhatsApp senden – optional mit Abhol- & Bringservice.',
+    'Termin bei Fresh Car Hamm anfragen: Leistungen wählen, Wunschtermin angeben und die vorbereitete Anfrage per WhatsApp senden.',
   path: '/termin',
 });
 

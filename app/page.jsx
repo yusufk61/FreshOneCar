@@ -8,10 +8,13 @@ import GalleryMedia, { galleryCaption } from '@/components/GalleryTile';
 import { SITE, PICKUP_NOTE } from '@/data/site';
 import { PACKAGES, EXTRAS, MIN_PRICES } from '@/data/services';
 import { getMedia } from '@/lib/media';
-import { siteUrl } from '@/lib/seo';
+import { siteUrl, socialMetadata } from '@/lib/seo';
 
 // Titel/Beschreibung kommen aus dem Root-Layout ("Fresh Car Hamm | Premium Fahrzeugaufbereitung in Hamm").
-export const metadata = { ...(siteUrl() ? { alternates: { canonical: '/' } } : {}) };
+export const metadata = {
+  ...(siteUrl() ? { alternates: { canonical: '/' } } : {}),
+  ...socialMetadata({ title: `${SITE.name} | ${SITE.claim}`, description: 'Dein Auto. Frisch wie neu. Innenraum, Außenpflege, Politur und Abhol- & Bringservice in Hamm.', url: '/' }),
+};
 
 const USPS = [
   { icon: 'seat', title: 'Innenraum', text: 'Tiefenreinigung von Sitzen bis Kofferraum', href: '/leistungen#pakete' },
@@ -63,10 +66,9 @@ export default function Home() {
           <Link
             className="hero-rating"
             href="/bewertungen"
-            aria-label={`Google-Bewertungen ansehen: ${SITE.google.ratingLabel} von 5 bei ${SITE.google.reviewCount} Rezensionen`}
           >
             <Stars size={14} label="" />
-            <strong>{SITE.google.ratingLabel}</strong>
+            <strong>{SITE.google.ratingLabel}</strong>{' '}
             <span>{SITE.google.reviewCount} Google-Rezensionen</span>
             <Icon name="arrow-up-right" size={16} />
           </Link>

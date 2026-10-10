@@ -280,7 +280,7 @@ html.menu-open body {
   font-weight: 900;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #777;
+  color: var(--text-dim);
 }
 .menu-kicker span {
   display: inline-block;
@@ -321,7 +321,7 @@ html.menu-open body {
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.16em;
-  color: #5d5d58;
+  color: var(--text-dim);
   transition: color 0.2s;
 }
 .menu-link > span {
@@ -343,7 +343,7 @@ html.menu-open body {
     transform 0.2s;
 }
 .menu-arrow {
-  color: #4f4f4b;
+  color: var(--text-dim);
   transition:
     color 0.2s,
     transform 0.25s;
@@ -484,7 +484,7 @@ html.menu-open body {
   font-size: 9px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #6c6c67;
+  color: var(--text-dim);
 }
 
 /* --- Footer ----------------------------------------------------------------------------- */
@@ -508,7 +508,7 @@ html.menu-open body {
   margin: 18px 0 24px;
   font-size: 11px;
   line-height: 1.75;
-  color: #7a7a74;
+  color: var(--text-dim);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -578,7 +578,7 @@ html.menu-open body {
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6a6a65;
+  color: var(--text-dim);
 }
 .footer-legal span {
   margin-right: auto;

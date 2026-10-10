@@ -6,12 +6,12 @@ import PagePager from '@/components/PagePager';
 import Icon from '@/components/Icon';
 import { PICKUP_NOTE } from '@/data/site';
 import { genericWhatsappUrl } from '@/lib/whatsapp';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, jsonLd } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: 'Abhol- & Bringservice',
   description:
-    'Optionaler Abhol- & Bringservice von Fresh Car Hamm: Nach Absprache holen wir dein Fahrzeug ab und bringen es nach der Aufbereitung wieder zurück – gegen Aufpreis, abhängig von Entfernung und Aufwand.',
+    'Abhol- & Bringservice von Fresh Car Hamm: Nach Absprache holen wir dein Fahrzeug ab und bringen es nach der Aufbereitung zurück – gegen Aufpreis.',
   path: '/abholservice',
 });
 
@@ -163,7 +163,7 @@ export default function AbholservicePage() {
         primary={{ href: '/termin?pickup=true', label: 'Abholservice anfragen' }}
       />
       <PagePager href="/abholservice" />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(faqLd) }} />
     </>
   );
 }
