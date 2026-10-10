@@ -8,6 +8,10 @@ import GalleryMedia, { galleryCaption } from '@/components/GalleryTile';
 import { SITE, PICKUP_NOTE } from '@/data/site';
 import { PACKAGES, EXTRAS, MIN_PRICES } from '@/data/services';
 import { getMedia } from '@/lib/media';
+import { siteUrl } from '@/lib/seo';
+
+// Titel/Beschreibung kommen aus dem Root-Layout ("Fresh Car Hamm | Premium Fahrzeugaufbereitung in Hamm").
+export const metadata = { ...(siteUrl() ? { alternates: { canonical: '/' } } : {}) };
 
 const USPS = [
   { icon: 'seat', title: 'Innenraum', text: 'Tiefenreinigung von Sitzen bis Kofferraum', href: '/leistungen#pakete' },

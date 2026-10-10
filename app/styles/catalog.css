@@ -404,7 +404,7 @@
     margin-top: 34px;
   }
   .package-card h3 {
-    font-size: 34px;
+    font-size: clamp(22px, 8vw, 34px);
   }
   .package-price strong {
     font-size: 34px;

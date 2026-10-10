@@ -82,6 +82,9 @@ section[id],
   color: #555;
 }
 .page-crumbs a {
+  display: inline-block;
+  padding: 14px 6px;
+  margin: -14px -6px;
   color: #8d8d88;
   transition: color 0.2s;
 }
@@ -488,6 +491,9 @@ section[id],
 }
 .hero-rating {
   min-height: 44px;
+}
+.scroll-cue {
+  padding: 16px 12px;
 }
 .pickup-mini {
   position: relative;
