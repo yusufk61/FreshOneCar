@@ -37,7 +37,7 @@ export default function PageHero({ crumb, path, title, accent, children, actions
             </ol>
           </nav>
           <h1>
-            <span>{title}</span>
+            <span>{title}</span>{' '}
             {accent ? <em>{accent}</em> : null}
           </h1>
           {children ? <div className="page-hero-lead">{children}</div> : null}

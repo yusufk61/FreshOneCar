@@ -484,7 +484,7 @@ main {
     right: 8%;
   }
   .section-head {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 28px;
   }
   .section-head > p {
@@ -548,7 +548,7 @@ main {
     padding-bottom: 78px;
   }
   .section h2 {
-    font-size: clamp(48px, 14vw, 76px);
+    font-size: clamp(32px, 10.4vw, 76px);
   }
   .section-head {
     margin-bottom: 34px;
@@ -732,7 +732,7 @@ svg {
     max-width: 100%;
     font-size: 8px;
   }
-  .hero-meta > div:nth-child(2) {
+  .hero:not(.page-hero) .hero-meta > div:nth-child(2) {
     display: none;
   }
 }

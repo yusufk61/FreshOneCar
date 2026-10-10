@@ -1,9 +1,11 @@
-.map-business-card img {
-  image-rendering: auto;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
+/* ==========================================================================
+   INFO — Bewertungen (Google-Panel, QR) und Kontakt & Standort (Karten, Map-Card)
+   Das Bewertungs-Panel (.reviews-shell, .reviews-score, .rating-number, .reviews-copy, …) wird auch von der
+   Startseite genutzt (.reviews-shell.is-compact, Feinheiten in pages.css) — Klassennamen bleiben kompatibel.
+   Neue Klassen: .rv-* (Bewertungen), .ct-* (Kontaktkarten)
+   ========================================================================== */
 
+/* --- Bewertungs-Panel ----------------------------------------------------------------------- */
 .reviews {
   padding-top: 70px;
 }
@@ -19,6 +21,7 @@
 .reviews-score {
   position: relative;
   z-index: 2;
+  min-width: 0;
   padding: 54px 46px;
   display: flex;
   flex-direction: column;
@@ -28,6 +31,8 @@
 }
 .rating-number {
   margin: 26px 0 12px;
+  /* Das Komma der Zahl ragt unter die Grundlinie — der Abstand nach unten verhindert Überlappung mit den Sternen. */
+  padding-bottom: 0.1em;
   font-size: clamp(104px, 13vw, 190px);
   font-weight: 1000;
   letter-spacing: -0.09em;
@@ -39,7 +44,7 @@
 }
 .reviews-score p {
   margin: 16px 0 0;
-  color: #777772;
+  color: #8a8a85;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -50,6 +55,7 @@
 .reviews-copy {
   position: relative;
   z-index: 2;
+  min-width: 0;
   padding: 68px clamp(34px, 6vw, 84px);
   display: flex;
   flex-direction: column;
@@ -63,11 +69,22 @@
   font-weight: 950;
 }
 .reviews-copy h2 {
-  font-size: clamp(54px, 6.4vw, 98px);
   margin: 19px 0 24px;
+  font-size: clamp(40px, 5.6vw, 98px);
+  font-weight: 950;
+  letter-spacing: -0.065em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+.reviews-copy h2 em {
+  display: block;
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.58);
 }
 .reviews-copy p {
   max-width: 650px;
+  margin: 0;
   color: #989893;
   line-height: 1.8;
   font-size: 15px;
@@ -83,46 +100,383 @@
 }
 .reviews-copy small {
   margin-top: 24px;
-  color: #5f5f5a;
-  font-size: 9px;
+  color: #85857f;
+  font-size: 10px;
   line-height: 1.6;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+/* statischer roter Schein (kein Blur-Filter → keine Rechenlast auf großen Flächen) */
 .reviews-glow {
   position: absolute;
-  width: 420px;
-  height: 420px;
+  width: 560px;
+  height: 560px;
+  right: -210px;
+  top: -230px;
   border-radius: 50%;
-  right: -160px;
-  top: -180px;
-  background: rgba(255, 23, 23, 0.16);
-  filter: blur(80px);
+  background: radial-gradient(circle, rgba(255, 23, 23, 0.2), rgba(255, 23, 23, 0.07) 42%, transparent 70%);
   pointer-events: none;
 }
 
+/* QR-Code: 450 × 450 px, 1-Bit, 10 px je Modul. Auf 180 px (4 px je Modul) skaliert → ganzzahlig und kantenscharf. */
+.review-qr {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 540px;
+  margin-top: 28px;
+  padding: 14px 20px 14px 14px;
+  border: 1px solid #242424;
+  background: #0c0c0c;
+  border-radius: 15px;
+}
+.review-qr-img {
+  flex: 0 0 auto;
+  display: block;
+  width: 196px;
+  height: 196px;
+  padding: 8px;
+  border-radius: 12px;
+  background: #fff;
+  image-rendering: pixelated;
+}
+.review-qr > div {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.review-qr strong {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: #fff;
+}
+.review-qr span {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #8a8a85;
+}
+
+/* Bewertungsseite: Hero-Text darf breiter laufen, damit „ECHTE ERGEBNISSE.“ auf großen Bildschirmen in einer Zeile steht */
+.page-hero-copy:has(.rv-hero-btn) {
+  max-width: min(100%, 1180px);
+}
+
+/* Bewertungsseite: Panel direkt unter dem Hero, danach „So bewertest du uns“ */
+.rv-panel {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+.rv-how {
+  padding-top: 56px;
+  padding-bottom: 72px;
+}
+.rv-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.rv-steps > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto 1fr auto auto;
+  min-height: 320px;
+  padding: 28px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, #0b0b0b, #070707);
+  transition-delay: var(--delay, 0ms);
+}
+.rv-steps > li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), transparent 80%);
+}
+.rv-steps .service-no {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  font-size: 12px;
+  color: #77776f;
+}
+.rv-steps .service-icon {
+  grid-column: 2;
+  grid-row: 1;
+}
+.rv-steps h3 {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin: 44px 0 10px;
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 950;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+.rv-steps p {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  max-width: 340px;
+  margin: 0;
+  color: #9a9a95;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.rv-honest {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 34px;
+  padding: 24px 28px;
+  border: 1px solid #2a2020;
+  border-radius: 20px;
+  background: linear-gradient(120deg, #150606, #0a0a0a 70%);
+}
+.rv-honest-icon {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--red);
+  color: #fff;
+}
+.rv-honest > div {
+  flex: 1;
+  min-width: 0;
+}
+.rv-honest strong {
+  display: block;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.rv-honest p {
+  margin: 6px 0 0;
+  color: #8f8f8a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.rv-honest .btn {
+  flex: 0 0 auto;
+}
+
+/* --- Kontaktkarten (große Tap-Flächen) -------------------------------------------------------- */
+.ct-contact {
+  padding-bottom: 40px;
+}
+.ct-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.ct-grid > li {
+  display: flex;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transition-delay: var(--delay, 0ms);
+}
+.ct-card {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "icon go"
+    "text text";
+  align-content: space-between;
+  row-gap: 44px;
+  min-height: 260px;
+  margin: 0;
+  padding: 28px;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(180deg, #0b0b0b, #070707);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.25s;
+}
+.ct-card:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), transparent 80%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.ct-card:hover,
+.ct-card:active {
+  background: #101010;
+}
+.ct-card:hover:before {
+  transform: scaleX(1);
+}
+.ct-icon {
+  grid-area: icon;
+  justify-self: start;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #282828;
+  border-radius: 14px;
+  color: #c9c9c5;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.ct-go {
+  grid-area: go;
+  align-self: start;
+  color: #55554f;
+  transition:
+    color 0.2s,
+    transform 0.2s;
+}
+.ct-card:hover .ct-go {
+  color: var(--red);
+  transform: translate(2px, -2px);
+}
+.ct-text {
+  grid-area: text;
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+.ct-text small {
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.ct-text strong {
+  font-size: clamp(20px, 1.9vw, 26px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.ct-text > span {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #8f8f8b;
+}
+/* Primärkarte (WhatsApp) */
+.ct-card.is-primary {
+  background: linear-gradient(135deg, #ff1717, #d10000);
+  color: #fff;
+}
+.ct-card.is-primary:hover,
+.ct-card.is-primary:active {
+  background: linear-gradient(135deg, #ff2d2d, #e00000);
+}
+.ct-card.is-primary:before {
+  display: none;
+}
+.ct-card.is-primary .ct-icon {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.14);
+  color: #fff;
+}
+.ct-card.is-primary .ct-go,
+.ct-card.is-primary:hover .ct-go {
+  color: #fff;
+}
+.ct-card.is-primary .ct-text small {
+  color: rgba(255, 255, 255, 0.88);
+}
+.ct-card.is-primary .ct-text > span {
+  color: rgba(255, 255, 255, 0.86);
+}
+/* Adresse kopieren: Zustände (die Klassen setzt components/CopyButton.jsx) */
+.ct-copy .ct-ico-done,
+.ct-copy .ct-hint-copied,
+.ct-copy .ct-hint-failed {
+  display: none;
+}
+.ct-copy.is-copied .ct-ico-idle,
+.ct-copy.is-copied .ct-hint-idle,
+.ct-copy.is-failed .ct-hint-idle {
+  display: none;
+}
+.ct-copy.is-copied .ct-ico-done,
+.ct-copy.is-copied .ct-hint-copied,
+.ct-copy.is-failed .ct-hint-failed {
+  display: block;
+}
+.ct-copy.is-copied .ct-icon {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+.ct-copy.is-copied .ct-hint-copied {
+  color: #fff;
+  font-weight: 800;
+}
+.ct-copy.is-failed .ct-hint-failed {
+  color: #ff9a9a;
+  font-weight: 800;
+}
+
+/* --- Standort ------------------------------------------------------------------------------- */
 .location {
-  padding-top: 70px;
+  padding-top: 40px;
+  padding-bottom: 80px;
 }
 .location-shell {
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1.14fr);
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
   border: 1px solid #252525;
   background: #090909;
   min-height: 650px;
 }
 .location-copy {
+  min-width: 0;
   padding: 62px clamp(30px, 5vw, 70px);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .location-copy h2 {
-  font-size: clamp(54px, 6.5vw, 98px);
   margin: 20px 0 34px;
+  font-size: clamp(44px, 5.2vw, 84px);
+  font-weight: 950;
+  letter-spacing: -0.065em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+.location-copy h2 em {
+  display: block;
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.58);
 }
 .location-copy > p {
   max-width: 550px;
+  margin: 0;
   color: #8f8f89;
   line-height: 1.8;
   font-size: 14px;
@@ -137,6 +491,7 @@
   margin-bottom: 22px;
 }
 .address-icon {
+  flex: 0 0 auto;
   width: 54px;
   height: 54px;
   border-radius: 15px;
@@ -146,30 +501,32 @@
   display: grid;
   place-items: center;
 }
-.address-block > div:last-child {
+.address-block address {
   display: grid;
   gap: 4px;
+  min-width: 0;
+  font-style: normal;
 }
-.address-block span {
-  font-size: 9px;
+.address-block address span {
+  font-size: 10px;
   letter-spacing: 0.18em;
-  color: #676762;
+  color: #85857f;
   font-weight: 900;
 }
-.address-block strong {
-  font-size: 20px;
+.address-block address strong {
+  font-size: clamp(18px, 1.7vw, 22px);
   line-height: 1.22;
   letter-spacing: -0.02em;
 }
-.address-block small {
+.address-block address small {
   font-size: 10px;
-  color: #777772;
+  color: #8a8a85;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 .route-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
   margin-top: 24px;
 }
@@ -180,10 +537,13 @@
   border: 1px solid #2b2b2b;
   background: #101010;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 12px;
   align-items: center;
-  transition: 0.2s;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    background 0.2s;
 }
 .route-btn:hover {
   transform: translateY(-2px);
@@ -193,14 +553,16 @@
 .route-btn > span {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
+  min-width: 0;
   font-size: 12px;
   font-weight: 950;
+  letter-spacing: 0.08em;
 }
 .route-btn small {
-  font-size: 8px;
-  color: #6f6f6a;
-  letter-spacing: 0.15em;
+  font-size: 9px;
+  color: #8a8a85;
+  letter-spacing: 0.16em;
 }
 .route-btn.google > svg:first-child {
   color: #fbbc04;
@@ -208,8 +570,12 @@
 .route-btn.apple > svg:first-child {
   color: #d8d8d8;
 }
+.route-btn > svg:last-child {
+  color: #77776f;
+}
 .map-visual {
   position: relative;
+  display: block;
   overflow: hidden;
   min-height: 650px;
   background: linear-gradient(135deg, #0b0b0b, #101010);
@@ -271,7 +637,7 @@
 }
 .road-label {
   position: absolute;
-  color: #4c4c48;
+  color: #5d5d58;
   font-size: 9px;
   letter-spacing: 0.24em;
   font-weight: 900;
@@ -282,8 +648,8 @@
   transform: rotate(-12deg);
 }
 .road-label-b {
-  right: 6%;
-  top: 10%;
+  left: 7%;
+  top: 9%;
 }
 .map-pin {
   position: absolute;
@@ -308,12 +674,13 @@
   color: #fff;
   box-shadow: 0 14px 50px rgba(255, 23, 23, 0.35);
 }
+/* statischer Ring statt Dauer-Puls */
 .pin-pulse {
   position: absolute;
-  inset: 0;
-  border: 1px solid rgba(255, 23, 23, 0.6);
+  inset: -12px;
+  border: 1px solid rgba(255, 23, 23, 0.4);
   border-radius: 50%;
-  animation: pinPulse 2.4s ease-out infinite;
+  box-shadow: 0 0 0 16px rgba(255, 23, 23, 0.05);
 }
 .map-business-card {
   position: absolute;
@@ -327,36 +694,47 @@
   border: 1px solid #303030;
   border-radius: 18px;
   display: grid;
-  grid-template-columns: 86px 1fr auto;
+  grid-template-columns: 86px minmax(0, 1fr) auto;
   gap: 15px;
   align-items: center;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  transition: border-color 0.2s;
+}
+.map-visual:hover .map-business-card {
+  border-color: #555;
 }
 .map-business-card img {
   width: 86px;
   height: auto;
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .map-business-card > div {
   display: grid;
   gap: 5px;
+  min-width: 0;
 }
 .map-business-card strong {
   font-size: 13px;
   letter-spacing: 0.04em;
 }
 .map-business-card span {
-  font-size: 10px;
-  color: #8d8d88;
+  font-size: 11px;
+  color: #9a9a95;
 }
 .map-business-card small {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 9px;
-  color: #aaa;
+  font-size: 10px;
+  color: #b0b0ab;
 }
 .map-business-card small svg {
   color: #ffc400;
+}
+.map-business-card > svg {
+  color: #8a8a85;
 }
 .map-open {
   position: absolute;
@@ -366,42 +744,112 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  padding: 9px 11px;
+  padding: 10px 12px;
   border: 1px solid #303030;
   border-radius: 999px;
   background: #0b0b0b;
-  font-size: 8px;
+  font-size: 9px;
   letter-spacing: 0.12em;
   font-weight: 900;
   color: #a4a49f;
 }
+
+/* --- Responsive ----------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .ct-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ct-card {
+    min-height: 220px;
+  }
+}
+
 @media (max-width: 1050px) {
   .reviews-shell {
     grid-template-columns: 0.72fr 1.28fr;
   }
   .location-shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .map-visual {
     border-left: 0;
     border-top: 1px solid #242424;
-    min-height: 560px;
+    min-height: 520px;
   }
   .location-copy {
     padding-top: 54px;
     padding-bottom: 54px;
   }
+  .location-copy h2 {
+    font-size: clamp(44px, 8.6vw, 76px);
+  }
 }
+
+@media (max-width: 900px) {
+  /* Tablet: Panel einspaltig, QR-Code entfällt (am Tablet scannt man nicht den eigenen Bildschirm) */
+  .rv-panel .reviews-shell {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .rv-panel .reviews-score {
+    padding: 44px 32px 42px;
+    border-right: 0;
+    border-bottom: 1px solid #242424;
+  }
+  .rv-panel .reviews-copy {
+    padding: 44px 32px 48px;
+  }
+  .rv-panel .review-qr {
+    display: none;
+  }
+  .rv-steps > li {
+    min-height: 280px;
+    padding: 24px 20px;
+  }
+  .rv-honest {
+    flex-wrap: wrap;
+  }
+  .rv-honest > div {
+    flex: 1 1 280px;
+  }
+}
+
+@media (max-width: 760px) {
+  .rv-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rv-steps > li {
+    min-height: 0;
+    padding: 24px 20px 26px;
+  }
+  .rv-steps h3 {
+    margin: 22px 0 8px;
+    font-size: 22px;
+  }
+  .rv-steps p {
+    max-width: none;
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 680px) {
   .reviews {
     padding-top: 54px;
   }
+  .rv-panel {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .rv-how {
+    padding-top: 36px;
+    padding-bottom: 56px;
+  }
   .reviews-shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     min-height: 0;
   }
   .reviews-score {
-    padding: 42px 24px;
+    padding: 42px 24px 40px;
     border-right: 0;
     border-bottom: 1px solid #242424;
   }
@@ -409,18 +857,21 @@
     font-size: 124px;
   }
   .reviews-score .review-stars svg {
-    width: 21px;
-    height: 21px;
+    width: 22px;
+    height: 22px;
   }
   .reviews-copy {
-    padding: 45px 24px 52px;
+    padding: 40px 24px 44px;
   }
   .reviews-copy h2 {
-    font-size: clamp(48px, 14vw, 70px);
+    font-size: clamp(30px, 9.4vw, 44px);
+  }
+  .reviews-copy p {
+    font-size: 14px;
   }
   .reviews-actions {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .reviews-actions .btn {
     width: 100%;
@@ -428,33 +879,94 @@
   .reviews-glow {
     display: none;
   }
+  /* QR-Code ist auf dem Handy sinnlos (man scannt nicht den eigenen Bildschirm) → dort gibt es den Button */
+  .review-qr {
+    display: none;
+  }
+  .section.rv-how h2,
+  .section.ct-contact h2 {
+    font-size: clamp(34px, 11.4vw, 62px);
+  }
+  .rv-honest {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px 20px;
+  }
+  .rv-honest > div {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .rv-honest .btn {
+    width: 100%;
+  }
+
+  .ct-contact {
+    padding-bottom: 28px;
+  }
+  .ct-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ct-card {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "icon text go";
+    align-content: center;
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 0;
+    min-height: 96px;
+    padding: 18px 16px;
+  }
+  .ct-icon {
+    width: 48px;
+    height: 48px;
+  }
+  .ct-go {
+    align-self: center;
+  }
+  .ct-text strong {
+    font-size: 18px;
+  }
+  .ct-text > span {
+    font-size: 12px;
+  }
+
   .location {
-    padding-top: 54px;
+    padding-top: 28px;
+    padding-bottom: 56px;
   }
   .location-shell {
     min-height: 0;
   }
   .location-copy {
-    padding: 44px 24px;
+    padding: 40px 22px;
   }
   .location-copy h2 {
-    font-size: clamp(48px, 14vw, 70px);
+    margin-bottom: 26px;
+    font-size: clamp(34px, 11.4vw, 62px);
+  }
+  .address-block {
+    gap: 14px;
+  }
+  .address-icon {
+    width: 50px;
+    height: 50px;
   }
   .route-actions {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .map-visual {
-    min-height: 500px;
+    min-height: 440px;
   }
   .map-pin {
     left: 60%;
-    top: 40%;
+    top: 38%;
   }
   .map-business-card {
     left: 14px;
     right: 14px;
     bottom: 16px;
-    grid-template-columns: 62px 1fr auto;
+    grid-template-columns: 62px minmax(0, 1fr) auto;
     gap: 10px;
     padding: 12px;
   }
@@ -462,57 +974,43 @@
     width: 62px;
   }
   .map-business-card span {
-    font-size: 9px;
+    font-size: 10px;
   }
   .map-business-card small {
-    font-size: 8px;
+    font-size: 10px;
   }
   .map-open {
     right: 14px;
     top: 14px;
+    font-size: 9px;
   }
   .road-label {
-    font-size: 7px;
+    font-size: 8px;
   }
-  .review-qr {
+}
+
+@media (max-width: 380px) {
+  .map-business-card {
+    grid-template-columns: 52px minmax(0, 1fr);
+  }
+  .map-business-card img {
+    width: 52px;
+  }
+  .map-business-card > svg {
     display: none;
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pin-pulse {
-    animation: none;
+  .road-label-b {
+    top: 64px;
   }
 }
-.review-qr {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 22px;
-  padding: 12px 14px;
-  border: 1px solid #242424;
-  background: #0c0c0c;
-  border-radius: 15px;
-  max-width: 470px;
-}
-.review-qr img {
-  width: 70px;
-  height: 70px;
-  display: block;
-  background: #fff;
-  border-radius: 8px;
-  padding: 5px;
-}
-.review-qr > div {
-  display: grid;
-  gap: 5px;
-}
-.review-qr strong {
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  color: #fff;
-}
-.review-qr span {
-  font-size: 10px;
-  line-height: 1.55;
-  color: #767671;
+
+@media (prefers-reduced-motion: reduce) {
+  .ct-card,
+  .ct-card:before,
+  .ct-go,
+  .ct-icon,
+  .route-btn,
+  .map-business-card {
+    transition: none;
+  }
 }
